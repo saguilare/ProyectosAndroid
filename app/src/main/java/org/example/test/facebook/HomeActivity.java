@@ -23,6 +23,8 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
+import java.util.concurrent.TimeUnit;
+import java.util.concurrent.TimeoutException;
 
 import org.example.test.facebook.Pojos.*;
 
@@ -63,13 +65,20 @@ public class HomeActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
+
+    }
+
+    @Override
+    public void onStart() {
+        super.onStart();
+
         //obtener lista de tipos casa
         GetTiposCasas();
-        GetTiposHabitacion();
+        //GetTiposHabitacion();
 
         //optener el precio de m2 para una provincia
         //GetPrecioM2Provincia();
-        //Get();
+
     }
 
     public void signOut(View view) {
@@ -89,23 +98,42 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    public void GetTiposCasas(){
-
-
-            new GetTiposCasasDromService().execute("casa");
-
+    public void GetTiposCasas() {
+        try{
+            new GetTiposCasasDromService().execute("casa").get(1000, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
     }
 
-    public void GetTiposHabitacion(){
-
-            new GetTiposHabitacionesService().execute("habitacion");
-
+    public void GetTiposHabitacion() {
+            try {
+                new GetTiposHabitacionesService().execute("habitacion").get(1000, TimeUnit.MILLISECONDS);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            } catch (ExecutionException e) {
+                e.printStackTrace();
+            } catch (TimeoutException e) {
+                e.printStackTrace();
+            }
     }
 
     public void GetPrecioM2Provincia(){
         precio = new Precio();
         precio.setCodigo("1");
-        new GetPrecioM2Provincia().execute(precio);
+        try{
+        new GetPrecioM2Provincia().execute(precio).get(1000, TimeUnit.MILLISECONDS);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (ExecutionException e) {
+            e.printStackTrace();
+        } catch (TimeoutException e) {
+            e.printStackTrace();
+        }
     }
 
     private class GetPrecioM2Provincia extends AsyncTask<Precio, Void,String> {
