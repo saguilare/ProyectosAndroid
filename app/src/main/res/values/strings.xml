@@ -1,7 +1,14 @@
 <resources>
-    <string name="app_name">Facebook</string>
+    <string name="app_name">Proyecto WS</string>
 
     <string name="facebook_application_id">188046965457025</string>
     <string name="fb_login_protocol_scheme">fb188046965457025</string>
+    <string name="title_activity_nav_drawer">Inicio</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">Bienvenido</string>
+    <string name="nav_header_subtitle">android.studio@android.com</string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Configuracion</string>
 
 </resources>

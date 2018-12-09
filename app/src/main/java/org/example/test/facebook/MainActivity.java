@@ -54,8 +54,6 @@ public class MainActivity extends AppCompatActivity implements
         setContentView(R.layout.activity_main);
 
 
-
-
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
         // [END initialize_auth]
@@ -78,6 +76,7 @@ public class MainActivity extends AppCompatActivity implements
         // [END config_signin]
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
+
 
         loginButton.setReadPermissions("email", "public_profile");
         loginButton.registerCallback(mCallbackManager, new FacebookCallback<LoginResult>() {
@@ -113,10 +112,11 @@ public class MainActivity extends AppCompatActivity implements
         // Check if user is signed in (non-null) and update UI accordingly.
         FirebaseUser currentUser = mAuth.getCurrentUser();
         updateUI(currentUser);
+
     }
     // [END on_start_check_user]
 
-    // [START on_activity_result]
+    // [START on_activity_result] STEVEN
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
@@ -142,6 +142,7 @@ public class MainActivity extends AppCompatActivity implements
         mCallbackManager.onActivityResult(requestCode, resultCode, data);
     }
     // [END on_activity_result]
+
 
     // [START auth_with_facebook]
     private void handleFacebookAccessToken(AccessToken token) {
@@ -204,6 +205,7 @@ public class MainActivity extends AppCompatActivity implements
     }
     // [END auth_with_google]
 
+
     // [START signin]
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -230,20 +232,10 @@ public class MainActivity extends AppCompatActivity implements
     private void updateUI(FirebaseUser user) {
         //hideProgressDialog();
         if (user != null) {
-            Intent intent = new Intent(this, HomeActivity.class);
-            startActivity(intent);
-            finish();
-            //mStatusTextView.setText(getString(R.string.facebook_status_fmt, user.getDisplayName()));
-            //mDetailTextView.setText(getString(R.string.firebase_status_fmt, user.getUid()));
+            startActivity(new Intent(MainActivity.this, NavDrawerActivity.class));
 
-            //findViewById(R.id.buttonFacebookLogin).setVisibility(View.GONE);
-            //findViewById(R.id.buttonFacebookSignout).setVisibility(View.VISIBLE);
-        } else {
-            // mStatusTextView.setText(R.string.signed_out);
-            //mDetailTextView.setText(null);
-
-            //findViewById(R.id.buttonFacebookLogin).setVisibility(View.VISIBLE);
-            //findViewById(R.id.buttonFacebookSignout).setVisibility(View.GONE);
+        }else{
+            //Toast.makeText(MainActivity.this, "Error de autenticacion", Toast.LENGTH_SHORT).show();
         }
     }
 
