@@ -13,6 +13,7 @@ import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -20,6 +21,8 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
 
 import org.example.test.facebook.Pojos.*;
 
@@ -38,6 +41,8 @@ public class HomeActivity extends AppCompatActivity {
     private GoogleSignInClient mGoogleSignInClient;
 
 
+    private List<Casa> TiposCasas;
+    private List<Habitacion> TiposHabitacion;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +63,13 @@ public class HomeActivity extends AppCompatActivity {
 
         mGoogleSignInClient = GoogleSignIn.getClient(this, gso);
 
-        Get();
+        //obtener lista de tipos casa
+        GetTiposCasas();
+        GetTiposHabitacion();
+
+        //optener el precio de m2 para una provincia
+        //GetPrecioM2Provincia();
+        //Get();
     }
 
     public void signOut(View view) {
@@ -78,15 +89,26 @@ public class HomeActivity extends AppCompatActivity {
     }
 
 
-    public void Get(){
-        precio = new Precio();
-        precio.setCodigo("1");
+    public void GetTiposCasas(){
 
-        method = "GET";
-        new SendSimpleRequest().execute(precio);
+
+            new GetTiposCasasDromService().execute("casa");
+
     }
 
-    private class SendSimpleRequest extends AsyncTask<Precio, Void,String> {
+    public void GetTiposHabitacion(){
+
+            new GetTiposHabitacionesService().execute("habitacion");
+
+    }
+
+    public void GetPrecioM2Provincia(){
+        precio = new Precio();
+        precio.setCodigo("1");
+        new GetPrecioM2Provincia().execute(precio);
+    }
+
+    private class GetPrecioM2Provincia extends AsyncTask<Precio, Void,String> {
         @Override
         protected String doInBackground(Precio... losGet) {
             final String baseurl = "http://35.227.65.203/iswservice/api";
@@ -113,6 +135,7 @@ public class HomeActivity extends AppCompatActivity {
                     }
                     br.close();
                 }
+                conn.disconnect();
             } catch (MalformedURLException e) {
                 e.printStackTrace();
             } catch (IOException e) {
@@ -126,6 +149,87 @@ public class HomeActivity extends AppCompatActivity {
         protected void onPostExecute(String sb) {
             precio = gson.fromJson(sb, Precio.class);
             ((Button)findViewById(R.id.btnSalir)).setText(precio.getDescripcion());
+        }
+    }
+
+
+    private class GetTiposCasasDromService extends AsyncTask<String, Void,String> {
+        @Override
+        protected String doInBackground(String... losGet) {
+            final String baseurl = "http://35.227.65.203/iswservice/api/casa";
+
+            HttpURLConnection conn;
+            try {
+                conn = (HttpURLConnection) new URL(baseurl).openConnection();
+                conn.setRequestMethod(method);
+                //conn.setDoOutput(true);
+                conn.connect();
+
+
+                int HttpResult =conn.getResponseCode();
+                if(HttpResult ==HttpURLConnection.HTTP_OK || HttpResult==HttpURLConnection.HTTP_CREATED){
+                    // sb.append(conn.getResponseMessage());
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            conn.getInputStream(),"utf-8"));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    br.close();
+                }
+                conn.disconnect();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return sb.toString();
+        }
+
+        protected void onPostExecute(String sb) {
+            TiposCasas = gson.fromJson(sb, new TypeToken<List<Casa>>(){}.getType());
+        }
+    }
+
+    private class GetTiposHabitacionesService extends AsyncTask<String, Void,String> {
+        @Override
+        protected String doInBackground(String... losGet) {
+            final String baseurl = "http://35.227.65.203/iswservice/api/habitacion";
+
+            HttpURLConnection conn;
+            try {
+                conn = (HttpURLConnection) new URL(baseurl).openConnection();
+                conn.setRequestMethod(method);
+                //conn.setDoOutput(true);
+                conn.connect();
+
+
+                int HttpResult =conn.getResponseCode();
+                if(HttpResult ==HttpURLConnection.HTTP_OK || HttpResult==HttpURLConnection.HTTP_CREATED){
+                    // sb.append(conn.getResponseMessage());
+                    BufferedReader br = new BufferedReader(new InputStreamReader(
+                            conn.getInputStream(),"utf-8"));
+                    String line = null;
+                    while ((line = br.readLine()) != null) {
+                        sb.append(line);
+                    }
+                    br.close();
+                }
+                conn.disconnect();
+            } catch (MalformedURLException e) {
+                e.printStackTrace();
+            } catch (IOException e) {
+                e.printStackTrace();
+            }catch(Exception e){
+                e.printStackTrace();
+            }
+            return sb.toString();
+        }
+
+        protected void onPostExecute(String sb) {
+            TiposHabitacion = gson.fromJson(sb, new TypeToken<List<Habitacion>>(){}.getType());
         }
     }
 }
