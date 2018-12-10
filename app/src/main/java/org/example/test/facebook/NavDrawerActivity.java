@@ -14,13 +14,17 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
+import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
 import com.google.android.gms.auth.api.signin.GoogleSignInClient;
 import com.google.android.gms.auth.api.signin.GoogleSignInOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
+
+import org.w3c.dom.Text;
 
 public class NavDrawerActivity extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -31,6 +35,9 @@ public class NavDrawerActivity extends AppCompatActivity
 
     private GoogleSignInClient mGoogleSignInClient;
 
+    TextView tvNombre;
+    TextView tvEmail;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,14 +45,15 @@ public class NavDrawerActivity extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
-        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        recibirDatos();
+        /*FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
                         .setAction("Action", null).show();
             }
-        });
+        });*/
 
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
@@ -113,8 +121,13 @@ public class NavDrawerActivity extends AppCompatActivity
 
         if (id == R.id.nav_camera) {
             // Handle the camera action
+            Intent intent = new Intent(this,HomeActivity.class);
+            startActivity(intent);
         } else
             if (id == R.id.nav_gallery) {
+                // Handle the camera action
+                Intent intent = new Intent(this,AgregarActivity.class);
+                startActivity(intent);
 
         } else
             if (id == R.id.nav_slideshow) {
@@ -135,23 +148,29 @@ public class NavDrawerActivity extends AppCompatActivity
     }
 
     private void revokeAccess() {
-        // Firebase sign out
-        mAuth.signOut();
+        if (mAuth != null){
+            mAuth.signOut();
+            LoginManager.getInstance().logOut();
 
-        // Google revoke access
-        mGoogleSignInClient.revokeAccess().addOnCompleteListener(this,
-                new OnCompleteListener<Void>() {
-                    @Override
-                    public void onComplete(@NonNull Task<Void> task) {
-                        salir();
-                    }
-                });
-    }
+            // Google sign out
+            mGoogleSignInClient.signOut();
+        }
 
-    private void salir(){
-        finish();
-        Intent intent = new Intent(this,MainActivity.class);
+        Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
-
+        finish();
     }
+
+    public void recibirDatos(){
+        Bundle extras = getIntent().getExtras();
+        String nombre = extras.getString("nombre");
+        String email = extras.getString("email");
+
+        tvNombre = (TextView) findViewById(R.id.tvNombre);
+        tvNombre.setText(nombre);
+
+        tvEmail = (TextView) findViewById(R.id.tvEmail);
+        tvEmail.setText(email);
+    }
+
 }

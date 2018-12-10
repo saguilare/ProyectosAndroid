@@ -206,6 +206,8 @@ public class MainActivity extends AppCompatActivity implements
     // [END auth_with_google]
 
 
+
+
     // [START signin]
     private void signIn() {
         Intent signInIntent = mGoogleSignInClient.getSignInIntent();
@@ -232,7 +234,15 @@ public class MainActivity extends AppCompatActivity implements
     private void updateUI(FirebaseUser user) {
         //hideProgressDialog();
         if (user != null) {
-            startActivity(new Intent(MainActivity.this, NavDrawerActivity.class));
+            String nombre = user.getDisplayName();
+            String email = user.getEmail();
+
+            Intent i = new Intent(this, NavDrawerActivity.class);
+            i.putExtra("nombre",nombre);
+            i.putExtra("email", email);
+            startActivity(i);
+
+            //startActivity(new Intent(MainActivity.this, NavDrawerActivity.class));
 
         }else{
             //Toast.makeText(MainActivity.this, "Error de autenticacion", Toast.LENGTH_SHORT).show();
