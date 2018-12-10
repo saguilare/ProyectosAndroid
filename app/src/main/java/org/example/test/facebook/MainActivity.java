@@ -232,7 +232,8 @@ public class MainActivity extends AppCompatActivity implements
     private void updateUI(FirebaseUser user) {
         //hideProgressDialog();
         if (user != null) {
-            startActivity(new Intent(MainActivity.this, NavDrawerActivity.class));
+            //startActivity(new Intent(MainActivity.this, NavDrawerActivity.class));
+            startActivity(new Intent(MainActivity.this,DBActivity.class));
 
         }else{
             //Toast.makeText(MainActivity.this, "Error de autenticacion", Toast.LENGTH_SHORT).show();

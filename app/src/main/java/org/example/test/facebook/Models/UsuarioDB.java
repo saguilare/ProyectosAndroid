@@ -14,6 +14,9 @@ public class UsuarioDB {
     @com.google.gson.annotations.SerializedName("complete")
     private boolean complete;
 
+    @com.google.gson.annotations.SerializedName("deleted")
+    private boolean deleted;
+
     @com.google.gson.annotations.SerializedName("name")
     private String name;
 
@@ -70,6 +73,15 @@ public class UsuarioDB {
     public boolean isComplete() {
         return complete;
     }
+
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
+    }
+    public boolean isDeleted() {
+        return deleted;
+    }
+
 
     /**
      * Item Name

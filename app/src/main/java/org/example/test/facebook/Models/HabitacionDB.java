@@ -12,6 +12,9 @@ public class HabitacionDB {
     @com.google.gson.annotations.SerializedName("complete")
     private boolean complete;
 
+    @com.google.gson.annotations.SerializedName("deleted")
+    private boolean deleted;
+
     @com.google.gson.annotations.SerializedName("descripcion")
     private String descripcion;
 
@@ -71,6 +74,14 @@ public class HabitacionDB {
      */
     public boolean isComplete() {
         return complete;
+    }
+
+    public boolean isDeleted() {
+        return deleted;
+    }
+
+    public void setDeleted(boolean deleted) {
+        this.deleted = deleted;
     }
 
     /**
