@@ -136,7 +136,8 @@ public class NavDrawerActivity extends AppCompatActivity
         }
         else
             if (id == R.id.nav_manage) {
-
+                Intent intent = new Intent(this,HabitacionActivity.class);
+                startActivity(intent);
         }
         else
             if (id == R.id.nav_salir) {

@@ -97,7 +97,7 @@ public class HabitacionActivity extends AppCompatActivity {
 
             // Get the Mobile Service Table instance to use
 
-            mHabitacionDBTable = mClient.getTable("habitaciones",HabitacionDB.class);
+            mHabitacionDBTable = mClient.getTable("Habitaciones",HabitacionDB.class);
 
 
 
@@ -286,8 +286,6 @@ public class HabitacionActivity extends AppCompatActivity {
 
                             //mAdapter.clear();
                             if(results != null) {
-                                ((TextView)findViewById(R.id.txtTest)).setText(results.get(0).getDescripcion());
-
                                 for (HabitacionDB item : results) {
                                     mAdapter.add(item);
                                 }
