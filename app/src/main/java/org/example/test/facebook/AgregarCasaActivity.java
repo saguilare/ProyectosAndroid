@@ -7,7 +7,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.Spinner;
@@ -31,7 +30,6 @@ import com.squareup.okhttp.OkHttpClient;
 
 import org.example.test.facebook.Models.CasaDB;
 import org.example.test.facebook.Pojos.Casa;
-import org.example.test.facebook.Pojos.Precio;
 
 import java.io.BufferedReader;
 import java.io.IOException;
@@ -39,6 +37,7 @@ import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.TimeUnit;
@@ -73,24 +72,21 @@ public class AgregarCasaActivity extends AppCompatActivity {
 
     Gson gson = new Gson();
     private StringBuilder sb = new StringBuilder();
-    private StringBuilder sbs = new StringBuilder(); //Se usa para sacar los precios por m2
     private String method= "GET";
 
     private List<Casa> TiposCasas;
 
     TextView tvCodigo;
-    private Precio precio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_agregar_casa);
 
+        llenarProvincias();
         //Crea spinner
         mySipinner = (Spinner)findViewById(R.id.spinner);
         tvCodigo = (TextView) findViewById(R.id.tvCodigo);
-
-        //GetPrecioM2Provincia();
 
         //Recibe Usuario
         Bundle extras = getIntent().getExtras();
@@ -130,6 +126,7 @@ public class AgregarCasaActivity extends AppCompatActivity {
 
         //obtener lista de tipos casa
         GetTiposCasas();
+
 
 
     }
@@ -192,65 +189,24 @@ public class AgregarCasaActivity extends AppCompatActivity {
         }
     }
 
-    /*public void GetPrecioM2Provincia(){
-        precio = new Precio();
-        precio.setCodigo("1");
-        try{
-            new AgregarCasaActivity.GetPrecioM2Provincia().execute(precio).get(1000, TimeUnit.MILLISECONDS);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        } catch (TimeoutException e) {
-            e.printStackTrace();
-        }
-    }*/
+    public void llenarProvincias(){
+        Spinner mySpinner2 = findViewById(R.id.spinner3);
+        List<String> listProvincias = new ArrayList<>();
+        listProvincias.add("San Jose");
+        listProvincias.add("Alajuela");
+        listProvincias.add("Cartago");
+        listProvincias.add("Heredia");
+        listProvincias.add("Guanacaste");
+        listProvincias.add("Puntarenas");
+        listProvincias.add("Limon");
 
-    /*private class GetPrecioM2Provincia extends AsyncTask<Precio, Void,String> {
-        @Override
-        protected String doInBackground(Precio... losGet) {
-            final String baseurl = "http://35.231.149.112/iswservice/api";
-            String url = baseurl;
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>( this,
+                android.R.layout.simple_spinner_item, listProvincias);
 
-            url += "/precio/"+precio.getCodigo();
-
-            HttpURLConnection conn;
-            try {
-                conn = (HttpURLConnection) new URL(url).openConnection();
-                conn.setRequestMethod(method);
-                //conn.setDoOutput(true);
-                conn.connect();
-
-
-                int HttpResult =conn.getResponseCode();
-                if(HttpResult ==HttpURLConnection.HTTP_OK || HttpResult==HttpURLConnection.HTTP_CREATED){
-                    // sb.append(conn.getResponseMessage());
-                    BufferedReader br = new BufferedReader(new InputStreamReader(
-                            conn.getInputStream(),"utf-8"));
-                    String line = null;
-                    while ((line = br.readLine()) != null) {
-                        sbs.append(line);
-                    }
-                    br.close();
-                }
-                conn.disconnect();
-            } catch (MalformedURLException e) {
-                e.printStackTrace();
-            } catch (IOException e) {
-                e.printStackTrace();
-            }catch(Exception e){
-                e.printStackTrace();
-            }
-            return sb.toString();
-        }
-
-        protected void onPostExecute(String sbs) {
-            precio = gson.fromJson(sbs, Precio.class);
-            //((Button)findViewById(R.id.btnSalir)).setText(precio.getDescripcion());
-            ((TextView)findViewById(R.id.tvCodigo)).setText(precio.getPrecio());
-        }
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        mySpinner2.setAdapter(adapter);
     }
-    */
+
     /**
      * Creates a dialog and shows it
      *
