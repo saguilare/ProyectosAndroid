@@ -14,4 +14,13 @@
         android:text="Button"
         tools:layout_editor_absoluteX="124dp"
         tools:layout_editor_absoluteY="92dp" />
+
+    <TextView
+        android:id="@+id/tvSalida"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="TextView"
+        app:layout_constraintTop_toBottomOf="@+id/btnSalir"
+        tools:layout_editor_absoluteX="131dp" />
 </android.support.constraint.ConstraintLayout>

@@ -33,31 +33,32 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="8dp"
                 android:text="Fotografia"
-                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etDescrpH"
                 tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="98dp" />
+                tools:layout_editor_absoluteX="0dp" />
 
             <EditText
                 android:id="@+id/etFoto"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="16dp"
                 android:ems="10"
                 android:inputType="textPersonName"
                 app:layout_constraintTop_toBottomOf="@+id/textView10"
                 tools:ignore="MissingConstraints"
-                tools:layout_editor_absoluteX="0dp" />
+                tools:layout_editor_absoluteX="2dp" />
 
             <Button
                 android:id="@+id/btnAgregarFoto"
                 android:layout_width="90dp"
                 android:layout_height="wrap_content"
-                android:layout_marginEnd="8dp"
                 android:layout_marginStart="24dp"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="28dp"
+                android:layout_marginEnd="8dp"
                 android:onClick="seleccionarFoto"
                 android:text="Agregar"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.6"
                 app:layout_constraintStart_toEndOf="@+id/etFoto"
                 app:layout_constraintTop_toBottomOf="@+id/textView10" />
 
@@ -74,6 +75,7 @@
                 android:minHeight="50dp"
                 android:scaleType="fitXY"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintHorizontal_bias="0.507"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/etFoto"
                 app:srcCompat="@drawable/ic_menu_camera" />
@@ -85,18 +87,98 @@
                 android:layout_marginTop="8dp"
                 android:onClick="insertar"
                 android:text="Subir"
-                app:layout_constraintTop_toBottomOf="@+id/ivFoto"
+                app:layout_constraintTop_toBottomOf="@+id/spinner2"
                 tools:layout_editor_absoluteX="0dp" />
 
             <Button
                 android:id="@+id/btnRegresar"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
+                android:layout_marginTop="4dp"
                 android:onClick="RegresarMainNav"
                 android:text="Regresar"
                 app:layout_constraintTop_toBottomOf="@+id/btnSalvar"
-                tools:layout_editor_absoluteX="229dp" />
+                tools:layout_editor_absoluteX="0dp" />
+
+            <TextView
+                android:id="@+id/tvCodigoH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Codigo"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <EditText
+                android:id="@+id/etCodigoH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintTop_toBottomOf="@+id/tvCodigoH"
+                tools:layout_editor_absoluteX="74dp" />
+
+            <TextView
+                android:id="@+id/tvCasaH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Casa"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etCodigoH" />
+
+            <EditText
+                android:id="@+id/etCasaH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="8dp"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintTop_toBottomOf="@+id/tvCasaH"
+                tools:layout_editor_absoluteX="100dp" />
+
+            <TextView
+                android:id="@+id/tvDescrpH"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Descripcion"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/etCasaH" />
+
+            <EditText
+                android:id="@+id/etDescrpH"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:ems="10"
+                android:inputType="textPersonName"
+                app:layout_constraintTop_toBottomOf="@+id/tvDescrpH"
+                tools:layout_editor_absoluteX="133dp" />
+
+            <TextView
+                android:id="@+id/tvTipoHabitacion"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:text="Tipos habitacion"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/ivFoto" />
+
+            <Spinner
+                android:id="@+id/spinner2"
+                android:layout_width="300dp"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/tvTipoHabitacion" />
 
         </android.support.constraint.ConstraintLayout>
     </ScrollView>

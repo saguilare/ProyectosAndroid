@@ -27,7 +27,8 @@
         <activity android:name=".AgregarActivity" />
         <activity android:name=".DBActivity" />
         <activity android:name=".CasaActivity" />
-        <activity android:name=".HabitacionActivity"></activity>
+        <activity android:name=".HabitacionActivity" />
+        <activity android:name=".AgregarCasaActivity"></activity>
     </application>
 
 </manifest>

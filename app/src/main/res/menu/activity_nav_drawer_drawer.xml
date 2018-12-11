@@ -7,15 +7,15 @@
         <item
             android:id="@+id/nav_camera"
             android:icon="@drawable/ic_menu_send"
-            android:title="Item1" />
+            android:title="Agregar Casa" />
         <item
             android:id="@+id/nav_gallery"
             android:icon="@drawable/ic_menu_send"
-            android:title="Item2" />
+            android:title="Agregar Habitacion" />
         <item
             android:id="@+id/nav_slideshow"
             android:icon="@drawable/ic_menu_send"
-            android:title="Item3" />
+            android:title="Ver" />
         <item
             android:id="@+id/nav_manage"
             android:icon="@drawable/ic_menu_send"

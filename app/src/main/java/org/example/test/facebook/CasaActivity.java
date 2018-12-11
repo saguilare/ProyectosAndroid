@@ -339,6 +339,7 @@ public class CasaActivity extends AppCompatActivity  {
      * @param casa
      *            The view that originated the call
      */
+    //Llamar este para add casa
     public void addItemCasa(CasaDB casa) {
         if (mClient == null) {
             return;

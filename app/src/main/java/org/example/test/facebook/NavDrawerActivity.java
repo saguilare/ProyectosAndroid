@@ -37,6 +37,7 @@ public class NavDrawerActivity extends AppCompatActivity
 
     TextView tvNombre;
     TextView tvEmail;
+    String email;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -120,23 +121,25 @@ public class NavDrawerActivity extends AppCompatActivity
         int id = item.getItemId();
 
         if (id == R.id.nav_camera) {
-            // Handle the camera action
-            Intent intent = new Intent(this,HomeActivity.class);
+            // Agregar Casa
+            Intent intent = new Intent(this,AgregarCasaActivity.class);
+            intent.putExtra("emailCasaAct",email);
             startActivity(intent);
         } else
             if (id == R.id.nav_gallery) {
-                // Handle the camera action
+                // Agregar Habitacion
                 Intent intent = new Intent(this,AgregarActivity.class);
                 startActivity(intent);
 
         } else
             if (id == R.id.nav_slideshow) {
+            //Ver
                 Intent intent = new Intent(this,CasaActivity.class);
                 startActivity(intent);
         }
         else
             if (id == R.id.nav_manage) {
-                Intent intent = new Intent(this,HabitacionActivity.class);
+                Intent intent = new Intent(this,HomeActivity.class);
                 startActivity(intent);
         }
         else
@@ -166,7 +169,7 @@ public class NavDrawerActivity extends AppCompatActivity
     public void recibirDatos(){
         Bundle extras = getIntent().getExtras();
         String nombre = extras.getString("nombre");
-        String email = extras.getString("email");
+        email = extras.getString("email");
 
         tvNombre = (TextView) findViewById(R.id.tvNombre);
         tvNombre.setText(nombre);

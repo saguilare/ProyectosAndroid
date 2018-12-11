@@ -6,6 +6,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.TextView;
 
 import com.facebook.login.LoginManager;
 import com.google.android.gms.auth.api.signin.GoogleSignIn;
@@ -27,6 +28,7 @@ import java.util.concurrent.TimeUnit;
 import java.util.concurrent.TimeoutException;
 
 import org.example.test.facebook.Pojos.*;
+import org.w3c.dom.Text;
 
 public class HomeActivity extends AppCompatActivity {
 
@@ -73,11 +75,18 @@ public class HomeActivity extends AppCompatActivity {
         super.onStart();
 
         //obtener lista de tipos casa
-        GetTiposCasas();
+        //GetTiposCasas();
+
+
+
+
+
         //GetTiposHabitacion();
 
         //optener el precio de m2 para una provincia
-        //GetPrecioM2Provincia();
+       GetPrecioM2Provincia();
+        TextView tvSalida = (TextView)findViewById(R.id.tvSalida);
+        tvSalida.setText(sb);
 
     }
 
@@ -139,7 +148,7 @@ public class HomeActivity extends AppCompatActivity {
     private class GetPrecioM2Provincia extends AsyncTask<Precio, Void,String> {
         @Override
         protected String doInBackground(Precio... losGet) {
-            final String baseurl = "http://35.227.65.203/iswservice/api";
+            final String baseurl = "http://35.231.149.112/iswservice/api";
             String url = baseurl;
 
             url += "/precio/"+precio.getCodigo();
@@ -184,7 +193,7 @@ public class HomeActivity extends AppCompatActivity {
     private class GetTiposCasasDromService extends AsyncTask<String, Void,String> {
         @Override
         protected String doInBackground(String... losGet) {
-            final String baseurl = "http://35.227.65.203/iswservice/api/casa";
+            final String baseurl = "http://35.231.149.112/iswservice/api/casa";
 
             HttpURLConnection conn;
             try {
@@ -224,7 +233,7 @@ public class HomeActivity extends AppCompatActivity {
     private class GetTiposHabitacionesService extends AsyncTask<String, Void,String> {
         @Override
         protected String doInBackground(String... losGet) {
-            final String baseurl = "http://35.227.65.203/iswservice/api/habitacion";
+            final String baseurl = "http://35.231.149.112/iswservice/api/habitacion";
 
             HttpURLConnection conn;
             try {

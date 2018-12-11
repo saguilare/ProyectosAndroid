@@ -23,8 +23,13 @@ public class Habitacion {
         this.descripcion = descripcion;
     }
 
-    public void Casa(){
+    public void Habitacion(){
 
     }
 
+
+    @Override
+    public String toString() {
+        return descripcion;
+    }
 }
