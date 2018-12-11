@@ -1,10 +1,12 @@
 package org.example.test.facebook.Models;
 
 
+import java.io.Serializable;
+
 /**
  * Represents an item in a ToDo list
  */
-public class CasaDB {
+public class CasaDB implements Serializable {
 
     @com.google.gson.annotations.SerializedName("id")
     private String id;

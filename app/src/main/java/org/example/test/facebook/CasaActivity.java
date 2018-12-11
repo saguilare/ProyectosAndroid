@@ -32,6 +32,7 @@ import com.microsoft.windowsazure.mobileservices.table.sync.localstore.SQLiteLoc
 import com.microsoft.windowsazure.mobileservices.table.sync.synchandler.SimpleSyncHandler;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
@@ -42,7 +43,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
 
-public class CasaActivity extends AppCompatActivity {
+public class CasaActivity extends AppCompatActivity  {
 
     /**
      * Adapter to sync the items list with the view
@@ -116,11 +117,10 @@ public class CasaActivity extends AppCompatActivity {
 
 
     public void irACasa(CasaDB casa) {
-
-
         //esteban pasar la casa para jalar las habitaciones de esa casa
-        startActivity(new Intent(CasaActivity.this, HabitacionActivity.class));
-
+        Intent intent = new Intent(this,HabitacionActivity.class);
+        intent.putExtra("casa",casa);
+        startActivity(intent);
     }
 
     /**

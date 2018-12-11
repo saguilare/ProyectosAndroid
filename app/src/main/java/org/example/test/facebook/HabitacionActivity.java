@@ -11,6 +11,7 @@ import android.widget.ListView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
+import org.example.test.facebook.Models.CasaDB;
 import org.example.test.facebook.Models.HabitacionDB;
 import org.example.test.facebook.Models.HabitacionDB;
 
@@ -33,6 +34,7 @@ import com.microsoft.windowsazure.mobileservices.table.sync.localstore.SQLiteLoc
 import com.microsoft.windowsazure.mobileservices.table.sync.synchandler.SimpleSyncHandler;
 import com.squareup.okhttp.OkHttpClient;
 
+import java.io.Serializable;
 import java.net.MalformedURLException;
 import java.util.HashMap;
 import java.util.List;
@@ -43,7 +45,7 @@ import java.util.concurrent.TimeUnit;
 
 import static com.microsoft.windowsazure.mobileservices.table.query.QueryOperations.val;
 
-public class HabitacionActivity extends AppCompatActivity {
+public class HabitacionActivity extends AppCompatActivity implements Serializable {
 
     /**
      * Adapter to sync the items list with the view
@@ -104,8 +106,9 @@ public class HabitacionActivity extends AppCompatActivity {
             //Init local storage
             //initLocalStore().get();
 
+            CasaDB cas = (CasaDB) getIntent().getSerializableExtra("casa");
             //esteban aqui se usa la casa que viene del otro intent
-            getAllHabitacionesDBItemsPorCasaFromTableAsync("test");
+            getAllHabitacionesDBItemsPorCasaFromTableAsync(cas.getCodigo());
 
 
         } catch (MalformedURLException e) {

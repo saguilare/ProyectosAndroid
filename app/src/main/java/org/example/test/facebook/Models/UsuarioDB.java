@@ -1,12 +1,13 @@
 package org.example.test.facebook.Models;
 
 
+import java.io.Serializable;
 import java.util.jar.Attributes;
 
 /**
  * Represents an item in a ToDo list
  */
-public class UsuarioDB {
+public class UsuarioDB implements Serializable {
 
     @com.google.gson.annotations.SerializedName("id")
     private String id;
