@@ -12,4 +12,8 @@
     <string name="action_settings">Configuracion</string>
     <string name="title_activity_usuario_db">UsuarioDBActivity</string>
 
+    <string name="adapterBtnTxt">IR</string>
+    <string name="adapterTxt">Casa</string>
+    <string name="title_activity_habitacion">HabitacionActivity</string>
+
 </resources>
